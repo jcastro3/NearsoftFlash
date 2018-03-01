@@ -1,0 +1,38 @@
+{
+  "name": "nearsoftflash",
+  "version": "1.0.0",
+  "description": "flash flash flash!",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --inline"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcastro3/NearsoftFlash.git"
+  },
+  "author": "jcastro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcastro3/NearsoftFlash/issues"
+  },
+  "homepage": "https://github.com/jcastro3/NearsoftFlash#readme",
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.9",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "style-loader": "^0.19.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.0"
+  }
+}
