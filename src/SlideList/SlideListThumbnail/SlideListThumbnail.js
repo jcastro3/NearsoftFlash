@@ -6,7 +6,9 @@ import './SlideListThumbnail.less'
 function SlideListThumbnail(props){
     const { slide , onSlideSelect } = props;
     return (
-        <div className="slide-thumbnail" onClick={onSlideSelect}>
+        <div className="slide-thumbnail"
+            value={slide.id}
+            onClick={(e) => onSlideSelect(e, slide.id)}>
             <h2>{slide.name}</h2>
         </div>
     );    

@@ -9,39 +9,49 @@ import { SLIDE_TYPE } from '../shared/constants'
 
 import '../Canvas/Canvas.less'
 
-function EmptyCanvasSlideContainer() {
+function EmptyCanvasSlideContainer(props) {
     return(
-        <div>
-            Empty Slide, Click to Add Content
+        <div className="slide-canvas--empty">
+            <span>{props.conditionalData.text}</span>
         </div>
     )
 }
 
-const withEmptySlideChecker = (Component) => (props) => 
-    (props.slideData === null) ? <EmptyCanvasSlideContainer/> : <Component {...props}/>;
+const withEmptySlideChecker = (Component, conditionalData) => (props) => 
+    (props.slideData === null) ? <EmptyCanvasSlideContainer conditionalData={conditionalData}/> : <Component {...props}/>;
 
 const withConditionalRendering = compose(
     withEmptySlideChecker
 )
 
-const SevenGeese = withConditionalRendering(CanvasSevenGeese);
-const MainView = withConditionalRendering(CanvasMain);
-const Footer = withConditionalRendering(CanvasFooterContainer);
+const SevenGeese = withConditionalRendering(CanvasSevenGeese, {
+    text: 'Empty 7Geese View, Click to Add Content'
+});
+const MainView = withConditionalRendering(CanvasMain, {
+    text: 'Empty Main View, Click to Add Content'
+});
+const Footer = withConditionalRendering(CanvasFooterContainer, {
+    text: 'Empty Footer View, Click to Add Content'
+});
 
 
 function Canvas(props) {
-    
+    const { currentSlide, onSelectContainerSevenGeese, onSelectContainerMain, onSelectContainerFooter } = props;
     return(
         <div className="slide-canvas">
-            <div className="slide-canvas__left-container">
+            <div className="slide-canvas--left" onClick={onSelectContainerSevenGeese}>
                 <SevenGeese
-                    slideData={props.currentSlide.sevenGeese}/>
+                    slideData={currentSlide.sevenGeese}/>
             </div>
-            <div className="slide-canvas__right-container">
-                <MainView
-                    slideData={props.currentSlide.main}/>
-                <Footer
-                    slideData={props.currentSlide.footer}/>
+            <div className="slide-canvas--right">
+                <div className="main" onClick={onSelectContainerMain}>
+                    <MainView
+                        slideData={currentSlide.main}/>
+                </div>
+                <div className="footer" onClick={onSelectContainerFooter}>
+                    <Footer
+                        slideData={currentSlide.footer}/>
+                </div>
             </div>
         </div>
     );
