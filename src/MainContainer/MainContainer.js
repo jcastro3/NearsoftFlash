@@ -24,7 +24,7 @@ const withConditionalRendering = compose(
     withEmptyContainer
 );
 
-const CanvasWithConditionalRendering = withConditionalRendering(Canvas, 'Empty Canvas, Add new Slide to Begin...', 'slide-canvas--empty');
+const CanvasWithConditionalRendering = withConditionalRendering(Canvas, 'Empty Canvas, Add new Slide to Begin...', 'slide-canvas--container-empty');
 const SlideConfigurationWithConditionalRendering = withConditionalRendering(SlideConfiguration, 'Empty config.', 'slide-configuration--empty');       
 
 class MainContainer extends React.Component {
@@ -38,8 +38,10 @@ class MainContainer extends React.Component {
 
     onAddSlide(e) {
         const slide = Slide();
+        const slides = this.state.slides
+            .map(s => (this.state.currentSlide.id === s.id) ? this.state.currentSlide : s);
         this.setState({
-            slides: [slide, ...this.state.slides],
+            slides: [slide, ...slides],
             currentSlide: slide
         });
     }
@@ -100,6 +102,30 @@ class MainContainer extends React.Component {
         }         
     }
 
+    handleConfigInputChangeForMainContainer(e) {
+        e.preventDefault();
+        const name = e.target.name;
+        const value = e.target.value;
+        if(name === 'title') {
+            this.state.currentSlide.main[name].value = value;
+        }
+        if(name === 'description') {
+            this.state.currentSlide.main[name].value = value; 
+        }
+        if(name === 'backgroundColor') {
+            this.state.currentSlide.main[name] = value; 
+        }
+        const currentSlide = Object.assign(this.state.currentSlide);
+        this.setState({ currentSlide });
+    }
+
+    onDragStopConfigEvent(e, container, property) {
+        //que pishe coshi 🐖 but it works!!!
+        this.state.currentSlide[container][property].positionX = parseInt(e.target.style.transform.match(/([0-9]){1,5}/g)[0]);
+        this.state.currentSlide[container][property].positionY = parseInt(e.target.style.transform.match(/([0-9]){1,5}/g)[1]);
+        const currentSlide = Object.assign(this.state.currentSlide);
+        this.setState({ currentSlide })
+    }
     
     render() {
         return(
@@ -114,8 +140,10 @@ class MainContainer extends React.Component {
                     onSelectContainerSevenGeese={this.onSelectContainerSevenGeese.bind(this)}
                     onSelectContainerMain={this.onSelectContainerMain.bind(this)}
                     onSelectContainerFooter={this.onSelectContainerFooter.bind(this)}
+                    onDragStopConfigEvent={this.onDragStopConfigEvent.bind(this)}
                     />
                 <SlideConfigurationWithConditionalRendering
+                    handleConfigInputChangeForMainContainer={this.handleConfigInputChangeForMainContainer.bind(this)}
                     currentSlide={this.state.currentSlide}/>
             </div>
         );

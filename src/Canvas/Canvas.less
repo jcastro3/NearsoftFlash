@@ -1,14 +1,10 @@
 .slide-canvas {
     width: 70%;
-    background: pink;
     display: flex;
     flex-flow: row;
-    &--left, &--right {
-        margin: 5px;
-    }
     &--left {
         width: 28%;
-
+        background-color: #f1f1f1;
     }
     &--right {
         width: 72%;
@@ -16,21 +12,27 @@
         flex-direction: column;
         .main {
             height: 80%;
+            background-color: #e0e0e0;
+            //this is for the draggable elements
+            position: relative;
         }
         .footer {
             height: 20%;
+            background-color: #cacaca;
         }
     }
 
-    &--empty {
+    &--container-empty, &--empty {
         height: 100%;
-        border: 2px dashed #cdaab0;
-        border-radius: 9px;
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 10px;
         text-align: center;
         width: 100%;
+    }
+
+    &--container-empty {
+        width: 70%;        
     }
 }

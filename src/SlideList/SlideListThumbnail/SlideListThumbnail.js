@@ -14,8 +14,17 @@ function SlideListThumbnail(props){
     );    
 }
 
+function SlideListThumbnailEmpty() {
+    return (
+        <div className="slide-thumbnail-empty"></div>
+    );  
+}
+
 SlideListThumbnail.propTypes = {
     slides: PropTypes.array
 }
 
-export default SlideListThumbnail;
+export {
+    SlideListThumbnail,
+    SlideListThumbnailEmpty
+};
