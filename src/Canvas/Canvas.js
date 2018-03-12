@@ -37,9 +37,7 @@ const Footer = withConditionalRendering(CanvasFooterContainer, {
 
 function Canvas(props) {
     const { currentSlide, onSelectContainerSevenGeese, onSelectContainerMain, onSelectContainerFooter, onDragStopConfigEvent } = props;
-    const canvasStyle = {
-        'backgroundColor': currentSlide.main.backgroundColor || '#ffffff'
-    }
+    const canvasStyle = (currentSlide.main && currentSlide.main.backgroundColor) ? { 'backgroundColor': currentSlide.main.backgroundColor || '#ffffff' } : null;
     return(
         <div className="slide-canvas">
             <div className="slide-canvas--left" onClick={onSelectContainerSevenGeese}>
