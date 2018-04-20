@@ -32,8 +32,14 @@ class MainContainer extends React.Component {
         super();
         this.state = {
             slides: [],
-            currentSlide: null
+            currentSlide: null,
+            width: 0,
+            height: 0
         }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize');
     }
 
     onAddSlide(e) {
@@ -106,25 +112,65 @@ class MainContainer extends React.Component {
         e.preventDefault();
         const name = e.target.name;
         const value = e.target.value;
+        const currentSlide = Object.assign({}, this.state.currentSlide);
         if(name === 'title') {
-            this.state.currentSlide.main[name].value = value;
+            currentSlide.main[name].value = value;
         }
         if(name === 'description') {
-            this.state.currentSlide.main[name].value = value; 
+            currentSlide.main[name].value = value; 
         }
         if(name === 'backgroundColor') {
-            this.state.currentSlide.main[name] = value; 
+            currentSlide.main[name] = value; 
         }
-        const currentSlide = Object.assign(this.state.currentSlide);
         this.setState({ currentSlide });
     }
 
     onDragStopConfigEvent(e, container, property) {
         //que pishe coshi 🐖 but it works!!!
-        this.state.currentSlide[container][property].positionX = parseInt(e.target.style.transform.match(/([0-9]){1,5}/g)[0]);
-        this.state.currentSlide[container][property].positionY = parseInt(e.target.style.transform.match(/([0-9]){1,5}/g)[1]);
-        const currentSlide = Object.assign(this.state.currentSlide);
+        const currentSlide = Object.assign({}, this.state.currentSlide);
+        currentSlide[container][property].positionX = parseInt(e.target.style.transform.match(/([0-9]){1,5}/g)[0]);
+        currentSlide[container][property].positionY = parseInt(e.target.style.transform.match(/([0-9]){1,5}/g)[1]);
         this.setState({ currentSlide })
+    }
+
+    onImageChange(e) {
+        e.preventDefault();
+        const reader = new FileReader();
+        const imageFile = e.target.files[0];
+        const currentSlide = Object.assign({}, this.state.currentSlide);
+ 
+        reader.onloadend = () => {
+            currentSlide.main.imageFile = imageFile;
+            currentSlide.main.backgroundImageUrl = reader.result;
+            this.setState({
+                currentSlide
+            });
+        }
+        reader.readAsDataURL(imageFile);        
+    }
+
+    setCanvasMainSize() {
+        const width = document.querySelector('.main').offsetWidth;
+        const height = document.querySelector('.main').offsetHeight;
+        this.setState( {
+            width,
+            height
+        })
+    }
+
+    onResize() {
+        const currentWidth = document.querySelector('.main').offsetWidth;
+        const currentHeight = document.querySelector('.main').offsetHeight;
+        const currentSlide = Object.assign({}, this.state.currentSlide);
+        currentSlide.main.title.positionX = Math.ceil(( currentWidth * currentSlide.main.title.positionX) / this.state.width);
+        currentSlide.main.title.positionY = Math.ceil(( currentHeight * currentSlide.main.title.positionY) / this.state.height);
+        currentSlide.main.description.positionX = Math.ceil(( currentWidth * currentSlide.main.description.positionX) / this.state.width);
+        currentSlide.main.description.positionY = Math.ceil(( currentHeight * currentSlide.main.description.positionY) / this.state.height);
+        this.setState({
+            currentSlide,
+            width: currentWidth,
+            height: currentHeight
+        });   
     }
     
     render() {
@@ -141,9 +187,12 @@ class MainContainer extends React.Component {
                     onSelectContainerMain={this.onSelectContainerMain.bind(this)}
                     onSelectContainerFooter={this.onSelectContainerFooter.bind(this)}
                     onDragStopConfigEvent={this.onDragStopConfigEvent.bind(this)}
-                    />
+                    setCanvasMainSize={this.setCanvasMainSize.bind(this)}
+                    onResize={this.onResize.bind(this)}
+                />
                 <SlideConfigurationWithConditionalRendering
                     handleConfigInputChangeForMainContainer={this.handleConfigInputChangeForMainContainer.bind(this)}
+                    onImageChange={this.onImageChange.bind(this)}
                     currentSlide={this.state.currentSlide}/>
             </div>
         );

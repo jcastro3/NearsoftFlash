@@ -1,15 +1,16 @@
 const Main = () => ({
     title: {
-        positionX: 0,
-        positionY: 0,
+        positionX: 285,
+        positionY: 100,
         value: ''
     },
     description: {
-        positionX: 0,
-        positionY: 0,
+        positionX: 170,
+        positionY: 225,
         value: ''
     },
-    backgroundImage: '',
+    backgroundImageUrl: '',
+    imageFile: null,
     fontSize: '',
     fontStyle: '',
     backgroundColor: ''

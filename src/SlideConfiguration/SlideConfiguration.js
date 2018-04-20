@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImageUpload from '../shared/ImageUpload';
 import '../SlideConfiguration/SlideConfiguration.less'
 
 function MainConfig(props) {
-    const { currentSlide, handleInputChange } = props;
+    const { currentSlide, handleInputChange, onImageChange } = props;
     return(
         <div className="slide-configuration--main">
             <input type="text" 
@@ -16,11 +17,6 @@ function MainConfig(props) {
                 placeholder="Description" 
                 value={currentSlide.main.description.value}
                 onChange={handleInputChange}/>
-            {/* <input type="file" 
-                name="backgroundImage" 
-                placeholder="Background Image" 
-                value={currentSlide.main.backgroundImage}
-                onChange={handleInputChange}/> */}
             <input type="text" 
                 name="fontSize" 
                 placeholder="Font Size" 
@@ -31,12 +27,15 @@ function MainConfig(props) {
                 placeholder="Background Color" 
                 value={currentSlide.main.backgroundColor}
                 onChange={handleInputChange}/>
+            <ImageUpload
+                onImageChange={onImageChange}
+            />                
         </div>
     );
 }
 
 function SlideConfiguration(props) {
-    const { currentSlide, handleConfigInputChangeForMainContainer } = props;
+    const { currentSlide, handleConfigInputChangeForMainContainer, onImageChange } = props;
     const activeType = currentSlide.active;
     return(
         <div className="slide-configuration">
@@ -44,7 +43,8 @@ function SlideConfiguration(props) {
                 activeType === 'main' &&
                 <MainConfig 
                     currentSlide={currentSlide} 
-                    handleInputChange={handleConfigInputChangeForMainContainer}/>
+                    handleInputChange={handleConfigInputChangeForMainContainer}
+                    onImageChange={onImageChange}/>
              
             }
         </div>

@@ -8,17 +8,26 @@ class CanvasMain extends React.Component {
         super(props);
     }
 
+    componentDidMount() {
+        this.props.setCanvasMainSize();
+        window.addEventListener('resize', this.props.onResize);
+    }
+    componentWillUnmount() {
+        window.removeEventListener('resize');
+    }
+
     render() {
         const { onDragStopConfigEvent, slideData } = this.props
-        const { title, description, fontSize, backgroundColor} = slideData;
-  
+        const { title, description, fontSize, backgroundColor, backgroundImageUrl, imageFile} = slideData;
+        const bgImage = (backgroundImageUrl && imageFile) ? { backgroundImage: `url(${backgroundImageUrl})`} : null;
         return (
-            <div className="canvas-main">
+            <div className="canvas-main" style={bgImage}>
                 {
                     title && title.value && 
                     <Draggable
                         axis="both"
                         bounds="div.main"
+                        position={{ x: title.positionX, y: title.positionY }}
                         onStop={(e) => onDragStopConfigEvent(e, 'main', 'title')}
                         >
                         <h1>{title.value}</h1>
