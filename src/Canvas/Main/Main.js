@@ -1,8 +1,8 @@
 import React from 'react';
-import '../CanvasMain/CanvasMain.less'
+import '../Main/Main.less'
 import Draggable, { DraggableCore } from 'react-draggable'; // Both at the same time
 
-class CanvasMain extends React.Component {
+class Main extends React.Component {
 
     constructor(props) {
         super(props);
@@ -13,7 +13,7 @@ class CanvasMain extends React.Component {
         window.addEventListener('resize', this.props.onResize);
     }
     componentWillUnmount() {
-        window.removeEventListener('resize');
+        window.removeEventListener('resize', this.props.onResize, false);
     }
 
     render() {
@@ -52,4 +52,4 @@ class CanvasMain extends React.Component {
     }
 }
 
-export default CanvasMain;
+export default Main;

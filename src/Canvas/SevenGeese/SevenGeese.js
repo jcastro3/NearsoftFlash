@@ -1,7 +1,7 @@
 import React from 'react';
-import '../CanvasSevenGeese/CanvasSevenGeese.less'
+import '../SevenGeese/SevenGeese.less'
 
-class CanvasSevenGeese extends React.Component {
+class SevenGeese extends React.Component {
 
     openConfig() {
         
@@ -17,4 +17,4 @@ class CanvasSevenGeese extends React.Component {
     }
 }
 
-export default CanvasSevenGeese;
+export default SevenGeese;

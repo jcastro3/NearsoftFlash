@@ -1,7 +1,7 @@
 import React from 'react';
-import '../CanvasFooterContainer/CanvasFooterContainer.less'
+import '../Footer/Footer.less'
 
-class CanvasFooterContainer extends React.Component {
+class Footer extends React.Component {
 
 
     render() {
@@ -14,4 +14,4 @@ class CanvasFooterContainer extends React.Component {
     }
 }
 
-export default CanvasFooterContainer;
+export default Footer;

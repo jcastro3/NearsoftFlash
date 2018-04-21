@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 
-import CanvasSevenGeese from './CanvasSevenGeese/CanvasSevenGeese';
-import CanvasMain from './CanvasMain/CanvasMain';
-import CanvasFooterContainer from './CanvasFooterContainer/CanvasFooterContainer';
+import SevenGeese from './SevenGeese/SevenGeese';
+import Main from './Main/Main';
+import Footer from './Footer/Footer';
 import { SLIDE_TYPE } from '../shared/constants'
 
 import '../Canvas/Canvas.less'
@@ -24,13 +24,13 @@ const withConditionalRendering = compose(
     withEmptySlideChecker
 )
 
-const SevenGeese = withConditionalRendering(CanvasSevenGeese, {
+const _SevenGeese = withConditionalRendering(SevenGeese, {
     text: 'Empty 7Geese View, Click to Add Content'
 });
-const MainView = withConditionalRendering(CanvasMain, {
+const _Main = withConditionalRendering(Main, {
     text: 'Empty Main View, Click to Add Content'
 });
-const Footer = withConditionalRendering(CanvasFooterContainer, {
+const _Footer = withConditionalRendering(Footer, {
     text: 'Empty Footer View, Click to Add Content'
 });
 
@@ -41,19 +41,19 @@ function Canvas(props) {
     return(
         <div className="slide-canvas">
             <div className="slide-canvas--left" onClick={onSelectContainerSevenGeese}>
-                <SevenGeese
+                <_SevenGeese
                     slideData={currentSlide.sevenGeese}/>
             </div>
             <div className="slide-canvas--right">
                 <div className="main" style={canvasStyle} onClick={onSelectContainerMain}>
-                    <MainView
+                    <_Main
                         slideData={currentSlide.main}
                         onDragStopConfigEvent={onDragStopConfigEvent}
                         setCanvasMainSize={setCanvasMainSize}
                         onResize={onResize}/>
                 </div>
                 <div className="footer" onClick={onSelectContainerFooter}>
-                    <Footer
+                    <_Footer
                         slideData={currentSlide.footer}/>
                 </div>
             </div>

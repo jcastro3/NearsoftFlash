@@ -7,7 +7,7 @@ import Slide from '../models/Slide';
 import Main from '../models/Main';
 import Footer from '../models/Footer';
 import SevenGeese from '../models/SevenGeese';
-import './MainContainer.less'
+import './NSFlash.less'
 
 function EmptyContainer(props) {
     return (
@@ -27,7 +27,7 @@ const withConditionalRendering = compose(
 const CanvasWithConditionalRendering = withConditionalRendering(Canvas, 'Empty Canvas, Add new Slide to Begin...', 'slide-canvas--container-empty');
 const SlideConfigurationWithConditionalRendering = withConditionalRendering(SlideConfiguration, 'Empty config.', 'slide-configuration--empty');       
 
-class MainContainer extends React.Component {
+class NSFlash extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -36,10 +36,6 @@ class MainContainer extends React.Component {
             width: 0,
             height: 0
         }
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('resize');
     }
 
     onAddSlide(e) {
@@ -199,4 +195,4 @@ class MainContainer extends React.Component {
     }
 }
 
-export default MainContainer;
+export default NSFlash;
