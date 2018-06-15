@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { SlideListThumbnail, SlideListThumbnailEmpty } from './SlideListThumbnail/SlideListThumbnail';
-import SlideListAddButton from './SlideListAddButton/SlideListAddButton'
+import NSButton from '../presentation/NSButton/NSButton'
 
 import '../SlideList/SlideList.less'
 
@@ -23,8 +23,10 @@ function SlideList(props) {
     return(
         <div className="slide-list">            
             { renderThumbnails(props) }
-            <SlideListAddButton
-                onAddSlide={props.onAddSlide}/>
+            <NSButton
+                classStyle='slide-list-button'
+                action={props.onAddSlide}
+                text="+"/>
         </div>
     );
     
