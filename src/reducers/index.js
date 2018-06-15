@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import currentSlide from './currentSlide'
+import slides from './slides'
 export default combineReducers({
-    currentSlide
+    slides
 });
