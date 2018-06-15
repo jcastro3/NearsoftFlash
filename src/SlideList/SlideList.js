@@ -4,16 +4,17 @@ import { SlideListThumbnail, SlideListThumbnailEmpty } from './SlideListThumbnai
 import NSButton from '../presentation/NSButton/NSButton'
 
 import '../SlideList/SlideList.less'
+import { selectSlide } from '../actions';
 
 function SlideList(props) {
 
-    const renderThumbnails = ({ slides, onSlideSelect }) => {
+    const renderThumbnails = ({ slides, selectSlide }) => {
         if(slides.length) {
             return slides.map((slide, index) => {
                 return <SlideListThumbnail
-                    key={index}
+                    key={slide.id}
                     slide={slide}
-                    onSlideSelect={onSlideSelect} />
+                    selectSlide={selectSlide} />
             });
         } else {
             return <SlideListThumbnailEmpty/>
@@ -25,7 +26,7 @@ function SlideList(props) {
             { renderThumbnails(props) }
             <NSButton
                 classStyle='slide-list-button'
-                action={props.onAddSlide}
+                action={props.addSlide}
                 text="+"/>
         </div>
     );

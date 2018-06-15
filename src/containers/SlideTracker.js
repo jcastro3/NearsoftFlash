@@ -1,17 +1,17 @@
 import { connect } from 'react-redux';
 import SlideList from '../SlideList/SlideList';
-import { addSlide, slideSelect } from '../actions/index';
+import { addSlide, selectSlide } from '../actions/index';
 
 const mapStateToProps = (state) => ({
-    slides: state.slides
+    slides: state.slidesReducer.slides
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
     addSlide: () => dispatch(addSlide()),
-    selectSlide: () => dispatch(selectSlide())
+    selectSlide: (e, id) => dispatch(selectSlide(e, id))
 });
 
-export default connect({
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-})(SlideList)
+)(SlideList)

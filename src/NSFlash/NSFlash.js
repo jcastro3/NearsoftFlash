@@ -8,6 +8,7 @@ import Main from '../models/Main';
 import Footer from '../models/Footer';
 import SevenGeese from '../models/SevenGeese';
 import './NSFlash.less'
+import SlideTracker from '../containers/SlideTracker.js';
 
 function EmptyContainer(props) {
     return (
@@ -172,11 +173,7 @@ class NSFlash extends React.Component {
     render() {
         return(
             <div className="main-container">
-                <SlidesList 
-                    slides={this.state.slides}
-                    onAddSlide={this.onAddSlide.bind(this)}
-                    onSlideSelect={this.onSlideSelect.bind(this)}
-                    />
+                <SlideTracker/>
                 <_Canvas
                     currentSlide={this.state.currentSlide}
                     onSelectContainerSevenGeese={this.onSelectContainerSevenGeese.bind(this)}
