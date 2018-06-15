@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 import SevenGeese from './SevenGeese/SevenGeese';
 import Main from './Main/Main';
@@ -65,5 +66,9 @@ function Canvas(props) {
 Canvas.propsTypes = {
     currentSlide: PropTypes.object
 }
+
+const mapStateToProps = state => ({
+    currentSlide: state.currentSlide
+});
 
 export default Canvas;

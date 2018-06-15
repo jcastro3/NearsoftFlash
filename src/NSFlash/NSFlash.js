@@ -24,8 +24,8 @@ const withConditionalRendering = compose(
     withEmptyContainer
 );
 
-const CanvasWithConditionalRendering = withConditionalRendering(Canvas, 'Empty Canvas, Add new Slide to Begin...', 'slide-canvas--container-empty');
-const SlideConfigurationWithConditionalRendering = withConditionalRendering(SlideConfiguration, 'Empty config.', 'slide-configuration--empty');       
+const _Canvas = withConditionalRendering(Canvas, 'Empty Canvas, Add new Slide to Begin...', 'slide-canvas--container-empty');
+const _SlideConfiguration = withConditionalRendering(SlideConfiguration, 'Empty config.', 'slide-configuration--empty');       
 
 class NSFlash extends React.Component {
     constructor() {
@@ -177,7 +177,7 @@ class NSFlash extends React.Component {
                     onAddSlide={this.onAddSlide.bind(this)}
                     onSlideSelect={this.onSlideSelect.bind(this)}
                     />
-                <CanvasWithConditionalRendering
+                <_Canvas
                     currentSlide={this.state.currentSlide}
                     onSelectContainerSevenGeese={this.onSelectContainerSevenGeese.bind(this)}
                     onSelectContainerMain={this.onSelectContainerMain.bind(this)}
@@ -186,7 +186,7 @@ class NSFlash extends React.Component {
                     setCanvasMainSize={this.setCanvasMainSize.bind(this)}
                     onResize={this.onResize.bind(this)}
                 />
-                <SlideConfigurationWithConditionalRendering
+                <_SlideConfiguration
                     handleConfigInputChangeForMainContainer={this.handleConfigInputChangeForMainContainer.bind(this)}
                     onImageChange={this.onImageChange.bind(this)}
                     currentSlide={this.state.currentSlide}/>
